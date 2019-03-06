@@ -1,3 +1,6 @@
+" pathogen start
+execute pathogen#infect()
+
 set nocompatible
 
 " determine filetype acording to name and auto-indent accordingly
@@ -21,6 +24,11 @@ set hlsearch
 set nomodeline
 
 "-----------------------------------------------
+" folding method
+set foldmethod=indent
+set foldlevel=99
+
+nnoremap <space> za
 
 " use insensituve search except when capital letters
 set ignorecase
@@ -73,4 +81,36 @@ set expandtab
 " <C-L> remapping
 nnoremap <C-L> :nohl<CR><C-L>
 
+"-----------------------------------
+
+" vim nerdtree set up
+autocmd vimenter * NERDTree
+
+map <C-n> :NERDTreeToggle<CR>
+
+autocmd bufenter * if (winnr("$") == 1 && exists("n:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 "------------------------------------
+
+" PEP 8 python indentation
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+" full stack dev indentation
+au BufNewfile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+"flagging extraneous whitespace
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" UTF-8 support
+set encoding=utf-8
+
