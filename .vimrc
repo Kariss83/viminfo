@@ -90,16 +90,18 @@ map <C-n> :NERDTreeToggle<CR>
 
 autocmd bufenter * if (winnr("$") == 1 && exists("n:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+let NERDTreeShowHidden=1
+
 "------------------------------------
 
 " PEP 8 python indentation
 au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
     \ set fileformat=unix
 
 " full stack dev indentation
@@ -108,8 +110,9 @@ au BufNewfile,BufRead *.js, *.html, *.css
     \ set softtabstop=2
     \ set shiftwidth=2
 
-"flagging extraneous whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" Trailing whitespace
+highlight BadWhitespace ctermbg=red guibg=darkred
+au BufNewfile,Bufread *.pyc, *.py, *.c, *.h match BadWhitespace /\s\+$/
 
 " UTF-8 support
 set encoding=utf-8
